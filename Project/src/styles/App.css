@@ -1,0 +1,213 @@
+*{
+  box-sizing: border-box;
+  margin:0px;
+  padding:0px;
+  font-family: Poppins;
+}
+
+p{
+  font-size: 16px;
+}
+
+/* fonts */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('../assets/fonts/Poppins-Regular.ttf');
+  }
+  @font-face {
+    font-family: 'Poppins-med';
+    src: url('../assets/fonts/Poppins-Medium.ttf');
+  }
+  
+  /* layout */
+
+  body{
+    
+    background-color: #fff;
+  }
+  
+  nav {
+    
+    color: white;
+    height: 8vh;
+  }
+  
+  nav ul {
+    background-color: #1e90ff;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  nav ul li {
+    float: left;
+    width: 25%;
+    padding: 10px 0px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+
+  nav ul li:hover{
+    background-color: #3e96ee;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #3e96ee;
+    color: white;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+  }
+  
+  .login_form{
+    float: left;
+    height: 80vh;
+    width: 100%;
+  }
+  .home {
+    padding: 20px;
+    height: 83vh;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    display: grid;
+    align-items: center;
+  }
+  
+  form {
+    margin: 20px 0;
+  }
+
+  .firstR{
+    color:#ff4500
+  }
+
+  .secondR{
+    color:rebeccapurple
+  }
+
+  .thirdR{
+    color:crimson
+  }
+
+  .fourthR{
+    color:darkgreen
+  }
+
+  /* SignupPage.css */
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between thumbnails */
+  margin-top: 20px;
+}
+
+.image-thumbnail {
+  flex: 1 1 100px; 
+  max-width: 100px; 
+}
+
+.thumbnail {
+  width: 100%; 
+  height: auto; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.interest-search {
+  margin-top: 20px; 
+}
+
+.buttons {
+  margin-top: 20px; 
+}
+
+.buttons .btn{
+  font-family: Poppins-Med;
+  color:#fff;
+}
+
+.image-thumbnail {
+  float: left;
+  display: inline-block;
+  width: 20%;
+  margin-right: 50px;
+}
+
+.gifs{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.gifs .gif:hover{
+  transform: scale(1.1);
+}
+
+.videos .video:hover{
+  transform: scale(1.1);
+  border: solid 4px #bd8337;
+  transition: all 1.2s ease-in-out;
+}
+
+.videos .video{
+  transition: all 1.2s ease-in-out;
+}
+
+.spinner {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: rouge 6s infinite;
+  animation-timing-function: linear;
+  padding:20px
+}
+@keyframes rouge {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.spinner_container{
+  float: left;
+  width: 100%;
+  text-align: center;
+  animation: rouge 6s infinite;
+  animation-timing-function: linear;
+}
+
+img.gif {
+  height: 120px;
+}
+
+.login_container{
+  min-height: 50vh !important;
+}
+
+.login_container button{
+  padding: 5px 10px;
+    background: #7676d7;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
