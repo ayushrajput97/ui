@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import legsImage from '../assets/images/2.png';
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -28,10 +29,10 @@ const Login = () => {
 
   return (
     <div class="container login_container">
-       <h1 className='title'>Welcome to Our GIV <span className="firstR">R</span><span className="secondR">E</span><span className="thirdR">S</span><span className="fourthR">T</span> App</h1>
+       <h1 className='title'>Take Flight To Your GIV <span className="firstR">R</span><span className="secondR">E</span><span className="thirdR">S</span><span className="fourthR">T</span> App</h1>
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Email:</label>
+      <div className='loginrest'>
+        <label className='labelRest'>Email:</label>
         <input
           type="email"
           value={email}
@@ -39,8 +40,8 @@ const Login = () => {
           required
         />
       </div>
-      <div>
-        <label>Password:</label>
+      <div className='loginrest'>
+        <label className='labelRest'>Password:</label>
         <input
           type="password"
           value={password}
@@ -53,6 +54,7 @@ const Login = () => {
         {loading ? 'Logging in...' : 'Login'}
       </button>
     </form>
+    <img alt="legs" className='login_image' src={legsImage} />
     </div>
   );
 };

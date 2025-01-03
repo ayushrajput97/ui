@@ -40,6 +40,7 @@ body {
   justify-content: center;
   flex-direction: column;
   min-height: 100vh;
+  align-items: center;
 }
 
 .title {
@@ -60,7 +61,7 @@ body {
 .buttons .btn,
 .buttons .btn:active,
 .buttons .btn:focus {
-  background-color: var(--primary-color);
+  background-color: #0069d9;
   box-shadow: none;
   outline: none;
   border: none;
@@ -86,12 +87,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: var(--default-margin);
 }
 
 .search-section .search-input {
   min-width: 500px;
   padding: var(--default-spacing);
+  margin-bottom: 15px;
+
 }
 
 .search-section .search-btn {
@@ -113,7 +115,7 @@ body {
 
 .filters > * {
   padding: 5px 10px;
-  background: #3e96ee;
+  background: #0069d9;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -169,14 +171,17 @@ body {
 .wrapper_giv{
   display: inline-flex;
   background: none;
-  width: 100%;
+  width: 62%;
   padding: 10px 0px;
+  justify-content: center;
+  margin-bottom: 15px;
+
 }
 
 .wrapper_giv .option{
   background: #fff;
   height: 100%;
-  width: 100%;
+  width: 23%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -219,4 +224,24 @@ body {
     gap: 10px;
     justify-content: center;
     margin-top: 20px;
+}
+
+.rest_Signup label{
+  float: left;
+  width: 100%;
+}
+
+.loginrest{
+  display: inline-block;
+  width: 35%;
+}
+
+.labelRest{
+  padding-left: 10px;
+  float: left;
+}
+.login_image{
+  width: 300px;
+  height: 150px;
+  object-fit: cover;
 }

@@ -2,12 +2,26 @@ import axios from 'axios';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import '../index.css';
-import requestGif from '../pages/request';
 
 const API_URL = 'https://api.unsplash.com/search/photos';
 const IMAGES_PER_PAGE = 20;
 const GIFS_PER_PAGE = 10; 
 const VIDEO_API_KEY = 'KFdtRzJESUBYW5CoBG4rOHJHaYGBW792T10TV0WigUbnGlF3V2uA05rC';
+const endpoint = 'https://api.giphy.com/v1/gifs/search';
+
+const requestGif = async ({
+  apiKey,
+  lang = 'en',
+  limit = '1',
+  offset = '0',
+  rating = 'G',
+  term = 'shrug',
+}) => {
+  const queryUri = `?api_key=${apiKey}&q=${term}&limit=${limit}&offset=${offset}&rating=${rating}&lang=${lang}`;
+  const response = await fetch(endpoint + queryUri);
+  if (!response.ok) throw new Error('Failed to fetch GIFs');
+  return response.json();
+};
 
 function Dashboard() {
   const searchInput = useRef(null);
@@ -20,24 +34,22 @@ function Dashboard() {
   const [totalVideosPages, setTotalVideosPages] = useState(0);
   const [errorMsg, setErrorMsg] = useState('');
   const [searchType, setSearchType] = useState('images');
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
 
   const fetchImages = useCallback(async () => {
     setLoading(true);
+    setErrorMsg('');
     try {
-      if (searchInput.current.value) {
-        setErrorMsg('');
-        const {data} = await axios.get(
-          `${API_URL}?query=${searchInput.current.value}
-          &page=${page}&per_page=${IMAGES_PER_PAGE}
-          &client_id=haX20yu-890kcdFCR_aWyEqG7HBGpgYevhwNl1Do0Qg`
-        );
-        setImages(data.results);
-        setTotalPages(data.total_pages);
-      }
+      const query = searchInput.current.value || 'a'; // Use 'a' as the default value
+const { data } = await axios.get(
+    `${API_URL}?query=${query}&page=${page}&per_page=${IMAGES_PER_PAGE}&client_id=haX20yu-890kcdFCR_aWyEqG7HBGpgYevhwNl1Do0Qg`
+);
+setImages(data.results);
+setTotalPages(data.total_pages);
+      
     } catch (error) {
       setErrorMsg('Failed to fetch images');
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -45,14 +57,20 @@ function Dashboard() {
 
   const fetchGifs = useCallback(async () => {
     setLoading(true);
+    setErrorMsg('');
     try {
-      const term = searchInput.current.value || 'shrug';
-      const gifData = await requestGif({ apiKey: 'hSeLixSvqGYQq617fSJXcDa425KoQG6l', term, limit: GIFS_PER_PAGE, offset: (page - 1) * GIFS_PER_PAGE });
+      const term = searchInput.current.value || 'champions';
+      const gifData = await requestGif({
+        apiKey: 'hSeLixSvqGYQq617fSJXcDa425KoQG6l',
+        term,
+        limit: GIFS_PER_PAGE,
+        offset: (page - 1) * GIFS_PER_PAGE
+      });
       setGifs(gifData.data);
       setTotalGifsPages(Math.ceil(gifData.pagination.total_count / GIFS_PER_PAGE));
     } catch (error) {
       setErrorMsg('Failed to fetch GIFs');
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -60,8 +78,9 @@ function Dashboard() {
 
   const fetchVideos = useCallback(async () => {
     setLoading(true);
+    setErrorMsg('');
     try {
-      const term = searchInput.current.value || '';
+      const term = searchInput.current.value || 'b';
       const res = await fetch(
         `https://api.pexels.com/videos/search?query=${term}&page=${page}&per_page=10`,
         {
@@ -73,13 +92,13 @@ function Dashboard() {
       const responseJson = await res.json();
       if (responseJson.videos) {
         setVideos(responseJson.videos);
-        setTotalVideosPages(Math.ceil(responseJson.total_results / 10));
+        setTotalVideosPages(Math.ceil(responseJson.total_results / 10)); // Corrected per_page to 10
       } else {
         setVideos([]);
       }
     } catch (error) {
       setErrorMsg('Failed to fetch videos');
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -110,14 +129,14 @@ function Dashboard() {
     event.preventDefault();
     resetSearch();
   };
+
   const handleSelection = (selection) => {
     searchInput.current.value = selection;
     resetSearch();
   };
 
-  // Reset the page whenever the searchType changes
   useEffect(() => {
-    setPage(1);
+    setPage(1); // Reset the page whenever the searchType changes
   }, [searchType]);
 
   return (
@@ -133,66 +152,35 @@ function Dashboard() {
               className='search-input'
               ref={searchInput}
             />
-            <div>
             <div className="wrapper_giv">
-      <label
-        className={`option ${searchType === 'images' ? 'selected' : ''}`}
-        onClick={() => setSearchType('images')}
-      >
-        <input
-          type="radio"
-          value="images"
-          checked={searchType === 'images'}
-          onChange={() => setSearchType('images')}
-        />
-        Images
-      </label>
-      
-      <label
-        className={`option ${searchType === 'gifs' ? 'selected' : ''}`}
-        onClick={() => setSearchType('gifs')}
-      >
-        <input
-          type="radio"
-          value="gifs"
-          checked={searchType === 'gifs'}
-          onChange={() => setSearchType('gifs')}
-        />
-        GIFs
-      </label>
-      
-      <label
-        className={`option ${searchType === 'videos' ? 'selected' : ''}`}
-        onClick={() => setSearchType('videos')}
-      >
-        <input
-          type="radio"
-          value="videos"
-          checked={searchType === 'videos'}
-          onChange={() => setSearchType('videos')}
-        />
-        Videos
-      </label>
-    </div>
+              <label className={`option ${searchType === 'images' ? 'selected' : ''}`} onClick={() => setSearchType('images')}>
+                <input type="radio" value="images" checked={searchType === 'images'} onChange={() => setSearchType('images')} />
+                Images
+              </label>
+              <label className={`option ${searchType === 'gifs' ? 'selected' : ''}`} onClick={() => setSearchType('gifs')}>
+                <input type="radio" value="gifs" checked={searchType === 'gifs'} onChange={() => setSearchType('gifs')} />
+                GIFs
+              </label>
+              <label className={`option ${searchType === 'videos' ? 'selected' : ''}`} onClick={() => setSearchType('videos')}>
+                <input type="radio" value="videos" checked={searchType === 'videos'} onChange={() => setSearchType('videos')} />
+                Videos
+              </label>
             </div>
             <div className='rest_btn'>
-            <Button type="submit">Search</Button>
+              <Button type="submit">Search</Button>
             </div>
           </form>
         </div>
         <div className="filters">
-          <div onClick={() => handleSelection('Fitness')}>Fitness and Excercise</div>
-          <div onClick={() => handleSelection('Marvel')}>MARVEL</div>
-          <div onClick={() => handleSelection('Retro')}>Retro</div>
+          <div onClick={() => handleSelection('Fitness')}>Fitness and Exercise</div>
+          <div onClick={() => handleSelection('Traveling')}>Traveling</div>
+          <div onClick={() => handleSelection('Oceans')}>Oceans</div>
         </div>
         
         {loading ? (
           <Spinner animation="border" role="status">
-            <div className='spinner_container'>
-            <span className="visually-hidden spinner"></span>
-            </div>
+            <span className="visually-hidden">Loading...</span>
           </Spinner>
-          
         ) : (
           <>
             <div className="images">
@@ -206,23 +194,23 @@ function Dashboard() {
               ))}
             </div>
             <div className="videos">
-  {searchType === 'videos' && videos.length > 0 ? (
-    videos.map((video) => (
-      <video 
-        key={video.id} 
-        controls 
-        className='video' 
-        onMouseEnter={(e) => e.currentTarget.play()} 
-        onMouseLeave={(e) => e.currentTarget.pause()}
-      >
-        <source src={video.video_files[0].link} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    ))
-  ) : (
-    searchType === 'videos' && <p>No videos found.</p>
-  )}
-</div>
+              {searchType === 'videos' && videos.length > 0 ? (
+                videos.map((video) => (
+                  <video 
+                    key={video.id} 
+                    controls 
+                    className='video' 
+                    onMouseEnter={(e) => e.currentTarget.play()} 
+                    onMouseLeave={(e) => e.currentTarget.pause()}
+                  >
+                    <source src={video.video_files[0].link} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ))
+              ) : (
+                searchType === 'videos' && <p>No videos found.</p>
+              )}
+            </div>
           </>
         )}
 

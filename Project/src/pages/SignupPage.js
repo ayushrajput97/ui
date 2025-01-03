@@ -63,7 +63,7 @@ const SignupPage = () => {
                 username, 
                 email, 
                 password, 
-                keywords: selectedKeywordsArray // Include keywords in the request
+                interest: selectedKeywordsArray // Include keywords in the request
             });
 
             setSuccessMsg(response.data.message);
@@ -82,9 +82,10 @@ const SignupPage = () => {
 
     return (
         <div className="signup-page">
-            <h1>Signup</h1>
+           <h1 className='title'>Begin Your GIV <span className="firstR">R</span><span className="secondR">E</span><span className="thirdR">S</span><span className="fourthR">T</span> Journey Now</h1>
             <form onSubmit={handleSignup}>
                 <div>
+                    <div className='rest_Signup'>
                     <label>Username:</label>
                     <input
                         type="text"
@@ -93,7 +94,9 @@ const SignupPage = () => {
                         required
                     />
                 </div>
+                </div>
                 <div>
+                <div className='rest_Signup'>
                     <label>Email:</label>
                     <input
                         type="email"
@@ -103,6 +106,8 @@ const SignupPage = () => {
                     />
                 </div>
                 <div>
+                    </div>
+                    <div className='rest_Signup'>
                     <label>Password:</label>
                     <input
                         type="password"
@@ -111,7 +116,8 @@ const SignupPage = () => {
                         required
                     />
                 </div>
-                <button type="submit">Signup</button>
+                </div>
+                <button type="submit" className='restSignup'>Signup</button>
             </form>
 
             {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}

@@ -1,5 +1,5 @@
 {
-  "name": "giphy",
+  "name": "givrest",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,18 +8,15 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",
-    "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
-    "giphy": "file:",
+    "givrest": "file:",
     "node-fetch": "^3.3.2",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-dom": "^18.3.1",
-    "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.28.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "whatwg-fetch": "^3.6.20"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

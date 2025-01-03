@@ -25,7 +25,7 @@ app.get('/api/keywords', async (req, res) => {
         const documents = await Users.find();
         
         // Extract keywords from each document
-        const keywords = documents.flatMap(doc => doc.keywords);
+        const keywords = documents.flatMap(doc => doc.interest);
         
         // Remove duplicates if necessary
         const uniqueKeywords = [...new Set(keywords)];

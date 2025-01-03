@@ -51,6 +51,8 @@ p{
   nav ul li a {
     color: white;
     text-decoration: none;
+    float: left;
+    width: 100%;
   }
 
   nav ul li:hover{
@@ -80,6 +82,7 @@ p{
     align-items: center;
     display: grid;
     align-items: center;
+    position: relative;
   }
   
   form {
@@ -111,6 +114,21 @@ p{
   margin-top: 20px;
 }
 
+.signup-page .images{
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+.signup-page .thumbnail-gallery{
+  display: inline-block;
+  width: 100%;
+}
+.signup-page .thumbnail{
+height: 100px;
+margin-top: 10px;
+}
+
 .image-thumbnail {
   flex: 1 1 100px; 
   max-width: 100px; 
@@ -137,7 +155,7 @@ p{
 }
 
 .image-thumbnail {
-  float: left;
+  
   display: inline-block;
   width: 20%;
   margin-right: 50px;
@@ -159,10 +177,14 @@ p{
   transform: scale(1.1);
   border: solid 4px #bd8337;
   transition: all 1.2s ease-in-out;
+ 
 }
-
+.login_container{
+  text-align: center;
+}
 .videos .video{
   transition: all 1.2s ease-in-out;
+  margin:10px;
 }
 
 .spinner {
@@ -196,7 +218,9 @@ p{
 }
 
 img.gif {
-  height: 120px;
+  height: 140px;
+  margin: 10px;
+  border-radius: 4px;
 }
 
 .login_container{
@@ -204,10 +228,90 @@ img.gif {
 }
 
 .login_container button{
-  padding: 5px 10px;
+  padding: 5px 19px;
     background: #7676d7;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
     border: none;
+}
+
+.login_container button:hover{
+  background: #464699;
+}
+
+.robo1{
+  position: absolute;
+  left: 0;
+  height: 200px;
+}
+
+.robo2{
+  position: absolute;
+  right: 0;
+  height: 200px;
+}
+
+.media-column {
+  float: left;
+  padding: 15px;
+}
+
+.image-grid img {
+  float: left;
+  width: 327px;
+  height: 400px;
+}
+
+.media-section {
+  float: left;
+  width: 100%;
+}
+
+.gif-grid{
+  display: grid;
+}
+
+.gif-grid img {
+  width: 300px;
+  height: 200px;
+}
+
+video{
+  width: fit-content;
+}
+
+.interest_item{
+  color: hsl(0, 76%, 45%);
+}
+
+.search-section{
+  text-align: center;
+}
+
+.signup-page form{
+  text-align: center;
+}
+
+.signup-page input{
+  padding:4px 8px;
+  border-radius: 3px;
+}
+
+.restSignup{
+  padding: 5px 11px;
+    border-radius: 4px;
+    border: none;
+    margin-top: 14px;
+    background: #5959b4;
+    color: #fff;
+    cursor: pointer;
+}
+
+.restSignup:hover{
+  background: #313175;
+}
+
+.loginrest input{
+  padding: 4px 10px;
 }

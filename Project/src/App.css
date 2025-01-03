@@ -24,6 +24,9 @@
   color: white;
 }
 
+.login_container{
+  text-align: center;
+}
 .App-link {
   color: #61dafb;
 }
